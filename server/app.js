@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
-import { client, db } from "./utils/db.js";
-import { ObjectId } from "mongodb";
+import { client } from "./utils/db.js"; //ลบ db
+import ProductRoute from "./routes/productRoute.js";
 
 const init = async () => {
   await client.connect();
@@ -15,8 +15,7 @@ const init = async () => {
 
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
-
-  
+  app.use("/products", ProductRoute.createRouter()); //ใส่ () ด้วย
 
   app.get("/", (req, res) => {
     res.send("Hello World!");

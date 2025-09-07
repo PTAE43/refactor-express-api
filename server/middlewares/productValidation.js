@@ -29,7 +29,7 @@ const ProductValidation = {
         }
 
         next();
-    }
-}
+    },
+};
 
 export default ProductValidation;
