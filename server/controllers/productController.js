@@ -1,4 +1,4 @@
-import productService from "../services/productController.js"
+import productService from "../services/productService.js"
 
 // Products routes
 const ProductController = {
@@ -6,13 +6,6 @@ const ProductController = {
         try {
             const name = req.query.keywords;
             const category = req.query.category;
-            const query = {};
-            if (name) {
-                query.name = new RegExp(name, "i");
-            }
-            if (category) {
-                query.category = new RegExp(category, "i");
-            }
             const products = await ProductController.getAllProducts(name, category);
             return res.status(200).json({
                 data: products
