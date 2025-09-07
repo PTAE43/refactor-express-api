@@ -1,4 +1,4 @@
-import ProductRepository from "../repositories/productRepository";
+import ProductRepository from "../repositories/productRepository.js";
 
 const ProductService = {
     getAllProducts: async (name, category) => {

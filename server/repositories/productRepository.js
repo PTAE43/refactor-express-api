@@ -1,4 +1,4 @@
-import { db } from "../utils/db";
+import { db } from "../utils/db.js";
 import { ObjectId } from "mongodb";
 
 const collection = db.collection("products");
