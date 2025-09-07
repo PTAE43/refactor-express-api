@@ -13,8 +13,8 @@
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
-    "express": "^4.17.3",
-    "mongodb": "^5.1.0",
-    "nodemon": "^2.0.15"
+    "express": "^4.21.2",
+    "mongodb": "^5.9.2",
+    "nodemon": "^2.0.22"
   }
 }
