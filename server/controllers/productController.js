@@ -87,7 +87,7 @@ app.get("/products", async (req, res) => {
     try {
 
 
-        const allProducts = await collection.find(query).limit(10).toArray();
+        
         return res.json({ data: allProducts });
     } catch (error) {
         return res.json({ message: `${error}` });
@@ -98,7 +98,7 @@ app.get("/products/:id", async (req, res) => {
     try {
 
 
-        const productById = await collection.findOne({ _id: productId });
+        
 
         return res.json({ data: productById });
     } catch (error) {
@@ -109,7 +109,7 @@ app.get("/products/:id", async (req, res) => {
 app.post("/products", async (req, res) => {
     try {
 
-        const newProductData = await collection.insertOne(productData);
+        
         return res.json({
             message: `Product Id ${newProductData.insertedId} has been created successfully`,
         });
@@ -123,7 +123,7 @@ app.put("/products/:id", async (req, res) => {
 
         const productId = new ObjectId(req.params.id);
 
-        await collection.updateOne({ _id: productId }, { $set: newProductData });
+        
         return res.json({
             message: `Movie record ${productId} has been updated successfully`,
         });
@@ -136,7 +136,7 @@ app.delete("/products/:id", async (req, res) => {
     try {
 
 
-        await collection.deleteOne({ _id: productId });
+        
 
         return res.json({
             message: `Movie record ${productId} has been deleted successfully`,
