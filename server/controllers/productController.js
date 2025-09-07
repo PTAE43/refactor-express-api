@@ -6,7 +6,7 @@ const ProductController = {
         try {
             const name = req.query.keywords;
             const category = req.query.category;
-            const products = await ProductController.getAllProducts(name, category);
+            const products = await productService.getAllProducts(name, category);
             return res.status(200).json({
                 data: products
             });
@@ -19,14 +19,15 @@ const ProductController = {
     getProductById: async (req, res) => {
         try {
             const productId = new ObjectId(req.params.id);
-            const product = await ProductController.getProductById(productId);
+            const product = await productService.getProductById(productId);
             if (!product) {
                 return res.status(404).json({
                     message: "Product not found.",
                 });
             }
             return res.status(200).json({
-                data: productId
+                message: `Product Id ${productId} has been created successfully`,
+                data: product
             });
 
         } catch (error) {
@@ -37,10 +38,11 @@ const ProductController = {
     createProduct: async (req, res) => {
         try {
             const productData = { ...req.body, created_at: new Date() };
-            const product = await ProductController.createProduct(productData);
+            const product = await productService.createProduct(productData);
             return res.status(200).json({
                 data: product
             });
+
         } catch (error) {
             return res.status(500).json({ message: `Error: ${error.message}`, });
         }
@@ -49,10 +51,12 @@ const ProductController = {
     updateProduct: async (req, res) => {
         try {
             const newProductData = { ...req.body, modified_at: new Date() };
-            const product = await ProductController.updateProduct(newProductData);
+            const product = await productService.updateProduct(newProductData);
             return res.status(200).json({
+                message: `Movie record ${newProductData} has been updated successfully`,
                 data: product
             });
+
         } catch (error) {
             return res.status(500).json({ message: `Error: ${error.message}`, });
         }
@@ -61,8 +65,9 @@ const ProductController = {
     deleteProduct: async (req, res) => {
         try {
             const productId = new ObjectId(req.params.id);
-            const product = await ProductController.deleteProduct(productId);
+            const product = await productService.deleteProduct(productId);
             return res.status(200).json({
+                message: `Movie record ${productId} has been deleted successfully`,
                 data: product
             });
 
@@ -72,69 +77,4 @@ const ProductController = {
     },
 };
 
-
-
-
-
-app.get("/products", async (req, res) => {
-    try {
-
-
-        
-        return res.json({ data: allProducts });
-    } catch (error) {
-        return res.json({ message: `${error}` });
-    }
-});
-
-app.get("/products/:id", async (req, res) => {
-    try {
-
-
-        
-
-        return res.json({ data: productById });
-    } catch (error) {
-        return res.json({ message: `${error}` });
-    }
-});
-
-app.post("/products", async (req, res) => {
-    try {
-
-        
-        return res.json({
-            message: `Product Id ${newProductData.insertedId} has been created successfully`,
-        });
-    } catch (error) {
-        return res.json({ message: `${error}` });
-    }
-});
-
-app.put("/products/:id", async (req, res) => {
-    try {
-
-        const productId = new ObjectId(req.params.id);
-
-        
-        return res.json({
-            message: `Movie record ${productId} has been updated successfully`,
-        });
-    } catch (error) {
-        return res.json({ message: `${error}` });
-    }
-});
-
-app.delete("/products/:id", async (req, res) => {
-    try {
-
-
-        
-
-        return res.json({
-            message: `Movie record ${productId} has been deleted successfully`,
-        });
-    } catch (error) {
-        return res.json({ message: `${error}` });
-    }
-});
+export default ProductController;
